@@ -1,38 +1,58 @@
 import React from 'react'
 import { Text, View, SafeAreaView , StyleSheet, ImageBackground, StatusBar } from 'react-native'
 import { Feather } from "@expo/vector-icons";
+import IconText from '../components/IconText';
 
 const City = () => {
   return (
-    <>
     <SafeAreaView style={styles.container}>
         <ImageBackground
         source={require('../../assets/City-background.jpg')}
         style={styles.image}
         >
+        <View style={styles.content}>
         <Text style={[styles.cityName, styles.cityText]}>Patna</Text>
         <Text style={[styles.countryName, styles.cityText]}>INDIA</Text>
-        <View style={styles.populationWrapper}>
-            <Feather name="user" size={50} color="red" />
-            <Text style={styles.populationText}>80000</Text>
+        <View style={[styles.populationWrapper, styles.rowLayout]}>
+            <IconText 
+            iconName={'user'} 
+            iconColor = "red"
+            bodyText={80000}
+            bodyTextStyle={styles.populationText}
+            />
         </View>
-        <View style={styles.riseSetWrapper}>
-            <Feather name="sunrise" size={50} color="white" />
-            <Text style={styles.riseSetText}>10:46:58am</Text>
-            <Feather name="sunset" size={50} color="white" />
-            <Text style={styles.riseSetText}>17:28:57pm</Text>
+        <View style={[styles.riseSetWrapper , styles.rowLayout]}>
+            <IconText 
+            iconName="sunrise"
+            iconColor="white"
+            bodyText="10:46:58am"
+            bodyTextStyle={styles.riseSetText}
+            />
+            <IconText 
+            iconName="sunset"
+            iconColor="white"
+            bodyText="17:28:57pm"
+            bodyTextStyle={styles.riseSetText}
+            />
+        </View>
         </View>
         </ImageBackground>
     </SafeAreaView>
-    </>
   )
 }
 
 const styles = StyleSheet.create({
     container : {
         flex : 1,
+        // justifyContent: "center",
+        // alignItems: "center"
         // marginTop: StatusBar.currentHeight || 0
     },
+    content : {
+        flex : 1,
+        justifyContent: "center",
+        // alignItems: "center"
+    },  
     image : {
         flex: 1
     },
@@ -49,8 +69,6 @@ const styles = StyleSheet.create({
         color: "white"
     },
     populationWrapper : {
-        flexDirection: "row",
-        alignItems : "center",
         justifyContent : "center",
         marginTop : 30
     },
@@ -58,18 +76,18 @@ const styles = StyleSheet.create({
         fontSize : 25,
         marginLeft : 7.5,
         color : "red",
-        fontWeight : "bold"
     },
     riseSetWrapper : {
-        flexDirection : "row",
-        alignItems : "center",
         justifyContent : "space-around",
-        marginTop : 30
+        marginTop : 30,
     },
     riseSetText : {
         fontSize: 20,
         color : "white",
-        fontWeight : "bold"
+    },
+    rowLayout : {
+        flexDirection: "row",
+        alignItems: "center"
     }
 })
 
