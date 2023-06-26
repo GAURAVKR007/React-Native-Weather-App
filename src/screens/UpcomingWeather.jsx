@@ -10,7 +10,6 @@ import {
   ImageBackground,
 } from "react-native";
 import ListItem from "../components/ListItem";
-import { Feather } from "@expo/vector-icons";
 
 const Data = [
   {
