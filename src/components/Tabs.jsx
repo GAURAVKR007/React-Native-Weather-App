@@ -9,10 +9,22 @@ const Tab = createBottomTabNavigator()
 
 const Tabs = () => {
     return (
-    <Tab.Navigator 
+    <Tab.Navigator
     screenOptions={{
+      lazy : true, // Load tab screens lazily
       tabBarActiveTintColor: "tomato",
-      tabBarInactiveTintColor: "gray"
+      tabBarInactiveTintColor: "gray",
+      tabBarStyle : {
+        backgroundColor: "black"
+      },
+      headerStyle : {
+        backgroundColor : "black"
+      },
+      headerTitleStyle : {
+        fontWeight : "bold",
+        fontSize : 25,
+        color: "tomato"
+      }
     }}
     >
       <Tab.Screen
@@ -20,7 +32,7 @@ const Tabs = () => {
        component={CurrentWeather} 
        options={{
         tabBarIcon: ({focused}) => (
-        <Feather name="droplet" size={25} color={focused ? "tomato" : "black"} />
+        <Feather name="droplet" size={25} color={focused ? "tomato" : "white"} />
         )
        }}
        />
@@ -30,7 +42,7 @@ const Tabs = () => {
       component={UpcomingWeather} 
       options={{
         tabBarIcon: ({focused}) => (
-          <Feather name="clock" size={25} color={focused ? "tomato" : "black"} />
+          <Feather name="clock" size={25} color={focused ? "tomato" : "white"} />
         )
       }}
       />
@@ -40,7 +52,7 @@ const Tabs = () => {
       component={City} 
       options={{
         tabBarIcon : ({focused}) => (
-          <Feather name="home" size={25} color={focused ? "tomato" : "black"} />
+          <Feather name="home" size={25} color={focused ? "tomato" : "white"} />
         )
       }}
       />
