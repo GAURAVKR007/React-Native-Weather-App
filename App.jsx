@@ -3,15 +3,29 @@ import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Tabs from "./src/components/Tabs";
 import * as Location from 'expo-location';
-import { TEST_KEY } from '@env';
+import { WEATHER_API_KEY } from '@env';
 
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 const App = () => {
-  // const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [latitude, setLatitude] = useState([]);
+  const [longitude, setLongitude] = useState([]);
   const [error, setError] = useState(null) 
-  console.log(TEST_KEY);
+  const [weather, setWeather] = useState([])
+
+  const fetchWeatherData = async() => {
+    try{
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`)
+    const data = await res.json()
+    setWeather(data);
+    setLoading(false)
+    } catch (error) {
+      setError("Error fetching weather")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -23,24 +37,27 @@ const App = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      setLatitude(location.coords.latitude)
+      setLongitude(location.coords.longitude)
+      await fetchWeatherData()
     })();
-  }, []);
+  }, [latitude,longitude]);
 
-  if(location) {
-    // console.log(location);
+  if(weather) {
+    console.log(latitude, longitude);
+    console.log(weather);
   }
 
-  // if(loading) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <ActivityIndicator 
-  //       size={100}
-  //       color="#0000ff"
-  //       />
-  //     </View>
-  //   )
-  // }
+  if(loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator 
+        size={100}
+        color="#0000ff"
+        />
+      </View>
+    )
+  }
 
 
   return (
