@@ -12,7 +12,7 @@ export const weatherType = {
     Rain : {
         icon : "umbrella",
         message : "You will need an Umbrella",
-        backgroundColor : "#0000ff"
+        backgroundColor : "lightblue"
     },
     Snow : {
         icon: "cloud-snow",
