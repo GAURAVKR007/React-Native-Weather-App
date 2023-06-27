@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   temp: {
+    marginTop: 40,
     color: "black",
     fontSize: 48
   },

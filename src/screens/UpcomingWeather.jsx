@@ -29,7 +29,7 @@ const UpcomingWeather = ({weatherData}) => {
           source={require("../../assets/light-back.jpg")}
           style={styles.img}
         >
-          
+
           <FlatList
             data={weatherData}
             renderItem={renderItem}
