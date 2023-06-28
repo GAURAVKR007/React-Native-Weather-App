@@ -4,30 +4,31 @@ import { WEATHER_API_KEY } from '@env';
 
 export const useGetWeather = () => {
   const [loading, setLoading] = useState(true);
-  const [latitude, setLatitude] = useState([]);
-  const [longitude, setLongitude] = useState([]);
-  const [error, setError] = useState(null) 
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [error, setError] = useState(false) 
   const [weather, setWeather] = useState([])
 
   const fetchWeatherData = async() => {
     try{
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric`)
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=aad0asdfsa7f4f914f0a068basdfasfeafdasfad6580a972f5e28&units=metric`)   //  Give Correct Api In Here ->  This is Wrong Api
     const data = await res.json()
     setWeather(data);
     setLoading(false)
+    console.log(loading);
     } catch (error) {
-      setError("Error fetching weather")
+      setError(true)
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    (async () => {
+    (async() => {
       
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        setError('Permission to access location was denied');
+        setError(true);
         return;
       }
 

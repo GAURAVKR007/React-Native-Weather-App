@@ -35,7 +35,7 @@ const Tabs = ({weather}) => {
         )
        }}
        >
-        {()=> <CurrentWeather weatherData={weather.list[0]}/>}
+        {()=> <CurrentWeather weatherData={weather.list[0]} />}
        </Tab.Screen>
 
       <Tab.Screen 
